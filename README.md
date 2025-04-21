@@ -4,7 +4,8 @@ A modern, responsive e-commerce product listing application built with Next.js, 
 
 ## 🔗 Live Demo
 
-[View Live Demo]()
+[View Live Demo](https://nextjs-ecommerce-product-filter.vercel.app/)
+The application is deployed on Vercel and automatically updates with each push to the main branch.
 
 ## 🌟 Features
 
