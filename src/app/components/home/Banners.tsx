@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import Image  from 'next/image'; 
 import jewellery from '../../assets/images/carousel/bracelet-carousel.webp';
 import mensFashion from '../../assets/images/carousel//image-carousel-men.jpg';
@@ -7,7 +7,7 @@ import womensFashionSale from'../../assets/images/carousel//womens-fashion-carou
 import Link from 'next/link'; 
 import { useSearchParams } from 'next/navigation';
 
-export default function Banners() {
+function BannersContent() {
   const [activeIndex, setActiveIndex] = useState(0); 
   const searchParams = useSearchParams();
   
@@ -110,6 +110,27 @@ export default function Banners() {
         <span className="carousel-control-next-icon" aria-hidden="true"></span>
         <span className="visually-hidden">Next</span>
       </button>
+      <div className="carousel-indicators">
+        {bannerImages.map((_, index) => (
+          <button
+            key={index}
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to={index}
+            className={index === activeIndex ? 'active' : ''}
+            aria-current={index === activeIndex ? 'true' : 'false'}
+            aria-label={`Slide ${index + 1}`}
+          ></button>
+        ))}
+      </div>
     </div>
-  )
+  );
+}
+
+export default function Banners() {
+  return (
+    <Suspense fallback={<div>Loading banners...</div>}>
+      <BannersContent />
+    </Suspense>
+  );
 }

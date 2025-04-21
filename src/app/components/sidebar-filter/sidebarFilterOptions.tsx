@@ -1,11 +1,11 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faCheck } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 
-export default function SidebarFilterOptions({ minRating, minPrice }: any) {
+function SidebarFilterContent({ minRating, minPrice }: any) {
   const router = useRouter();
   const searchParams = useSearchParams();
   
@@ -110,7 +110,7 @@ export default function SidebarFilterOptions({ minRating, minPrice }: any) {
       params.set('searchText', searchText);
     }
     
-    // Navigate to /products with preserved parameters
+    // Push the updated query string to the URL
     router.push(`/products?${params.toString()}`);
   };
 
@@ -212,5 +212,13 @@ export default function SidebarFilterOptions({ minRating, minPrice }: any) {
         }
       `}</style>
     </div>
+  );
+}
+
+export default function SidebarFilterOptions(props: any) {
+  return (
+    <Suspense fallback={<div>Loading filters...</div>}>
+      <SidebarFilterContent {...props} />
+    </Suspense>
   );
 }

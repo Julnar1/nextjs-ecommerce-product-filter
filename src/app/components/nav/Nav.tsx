@@ -1,8 +1,8 @@
 "use client";
-import React ,{useContext} from 'react';
+import React, { useContext, Suspense } from 'react';
 import LogoImg from "../../assets/images/smart_shop_logo.png";
 import classNames from "classnames";
-import { useState ,useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import './Nav.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -20,7 +20,7 @@ const links = [
   { name: 'Cart', href: '/cart' }, // Use FontAwesomeIcon 'faShoppingCart' for cart icon
 ];
 
-export default function Nav() {
+function NavContent() {
   const [searchText, setSearchText] = useState('');
   const searchParams = useSearchParams();
 
@@ -59,7 +59,8 @@ export default function Nav() {
 
   const { cartData } = useContext(CartContext);
   const cartLength = cartData.length;
-    // Calculate badge position dynamically based on icon size
+  
+  // Calculate badge position dynamically based on icon size
   return (
     <div>
       <nav
@@ -99,23 +100,26 @@ export default function Nav() {
                 </div>
               </div>
             </form>
-            <ul className="navbar-nav mb-2 mb-lg-0">
-            {links.map((link) => (
-                <li className="nav-item me-xl-2" key={link.href}>
-                  <Link href={link.href} className="nav-link">
-                    {link.name === 'Cart' ? (
-                      <> {/* Wrap icons and badge */}
-                      <FontAwesomeIcon icon={faShoppingCart} />
-                      {(cartLength > 0) && (
-                          <span
-                            className={classNames("badge", "badge-header")}
-                          >
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              {links.map((link) => (
+                <li className="nav-item" key={link.name}>
+                  <Link
+                    href={link.href}
+                    className={classNames("nav-link", {
+                      active: link.name === "Home",
+                    })}
+                  >
+                    {link.name === "Cart" ? (
+                      <div className="position-relative">
+                        <FontAwesomeIcon icon={faShoppingCart} />
+                        {cartLength > 0 && (
+                          <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             {cartLength}
                           </span>
                         )}
-                    </>
+                      </div>
                     ) : (
-                      link.name // Display link name for others
+                      link.name
                     )}
                   </Link>
                 </li>
@@ -125,6 +129,14 @@ export default function Nav() {
         </div>
       </nav>
     </div>
+  );
+}
+
+export default function Nav() {
+  return (
+    <Suspense fallback={<div>Loading navigation...</div>}>
+      <NavContent />
+    </Suspense>
   );
 }
 
