@@ -1,0 +1,22 @@
+.productCard{
+    display:flex;
+    width: 15rem;
+    height:375px;
+    text-align:center;
+    margin:5px 5px 0 0;
+}
+.cardTitleHeight{
+    min-height:59px;
+}
+.categoryBg{
+    background-color: darkgray;
+    padding:3px 5px;
+    border-radius:5px;
+}
+.imageHeight{
+    height:180px;
+}
+.buttonTextSize{
+    font-size:0.8em;
+    color:black;
+}

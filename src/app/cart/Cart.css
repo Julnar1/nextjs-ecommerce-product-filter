@@ -1,0 +1,57 @@
+/* Cart Totals Styling */
+.cart-totals {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.cart-totals h3 {
+    margin-bottom: 15px;
+}
+
+.cart-totals .subtotal,
+.cart-totals .shipping,
+.cart-totals .total {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.coupon {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.coupon input {
+    flex-grow: 1;
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.coupon button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.calculate-shipping-link {
+    display: block;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.checkout-btn {
+    display: block;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    border-radius:10px;
+    cursor: pointer;
+}
